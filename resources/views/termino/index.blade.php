@@ -42,6 +42,7 @@
             <div class="col-12 ml-2" style="background-color: #CBBDE2;"><!--Columna de contenido actualizable-->
 <br><br>
               <h1 class="text-green"> {{ $termino->termino }}</h1>
+              <h1 class="text-green"> {{ $termino->id }}</h1>
               <hr>
               <br>
               <p class="h2 text-green"> {{ $termino->descripcion }} </p>
