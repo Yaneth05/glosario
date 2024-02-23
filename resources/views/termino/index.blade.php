@@ -37,12 +37,11 @@
     </div>
         <div id="contenido"class="col-10 text-center bd-light">
           
-           <br>
-           <br><br>
+           
             <div class="col-12 ml-2" style="background-color: #CBBDE2;"><!--Columna de contenido actualizable-->
-<br><br>
+<br>
               <h1 class="text-green"> {{ $termino->termino }}</h1>
-              <h1 class="text-green"> {{ $termino->id }}</h1>
+              <h2 class="text-green"></h2>
               <hr>
               <br>
               <p class="h2 text-green"> {{ $termino->descripcion }} </p>
@@ -54,8 +53,8 @@
 <br>
               <td>   
                 <div class="d-flex justify-content-between">
-                    <a href="{{ url('/termino/'.$termino->id.'/edit') }}">Editar</a>
-                    <form action="{{ url('/termino/'.$termino->id) }}" method="post">
+                    <a id="editar" href="{{ url('/termino/'.$termino->id.'/edit') }}">Editar</a>
+                    <form id="borrar" action="{{ url('/termino/'.$termino->id) }}" method="post">
                         @csrf
                         {{ method_field('DELETE') }}
                         <input type="submit" class="btn btn-outline-danger" onclick="return confirm('¿Seguro que deseas borrar el término?')" value="Borrar ❌">
@@ -91,10 +90,13 @@
                     data: {id: id,_token: $('input[name="_token"]').val()},
                     // Si la petición es exitosa
                     success: function(data){
+                       
                         // Actualiza el contenido de los elementos <h1> y <p> con el nombre y la descripción del término
-                        $('h1').text(data.termino);
-                        $('p').text(data.descripcion);
+                        $('h1').text(data.termino); 
+                        $('p').text(data.descripcion); 
                         $('#term-image').attr('src', data.imagen);
+                        $('#borrar').attr('action', "http://127.0.0.1:8000" + '/termino/'+ id);
+                        $('#editar').attr('href', "http://127.0.0.1:8000" + '/termino/'+ id+ '/edit');
                     }
                 });
             });
